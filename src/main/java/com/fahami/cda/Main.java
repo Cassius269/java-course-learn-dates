@@ -1,14 +1,17 @@
 package com.fahami.cda;
 
+import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.Month;
 import java.time.OffsetTime;
+import java.time.Period;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
+import java.time.temporal.ChronoUnit;
 
 public class Main {
     public static void main(String[] args) {
@@ -55,6 +58,21 @@ public class Main {
         ZonedDateTime zonedDateTimeParis = ZonedDateTime.of(currentDateTime,  zoneParis);
         IO.println(zonedDateTimeParis);
 
+        // Manipuler les durées
+        Duration durationSeconds = Duration.ofSeconds(10000);
+        IO.println("Durée en secondes : " + durationSeconds);
         
+        LocalDate firstDate= LocalDate.of(2025, 12, 20);
+        LocalDate secondDate= LocalDate.of(2026, 12, 25);
+        // Duration differenceDuration = Duration.between(firstDate, secondDate);
+
+        // IO.println(differenceDuration);
+
+        Period period = Period.of(2, 3, 2);
+        long differenceDays = ChronoUnit.DAYS.between(firstDate, secondDate);
+        long differenceMonths = ChronoUnit.MONTHS.between(firstDate, secondDate);
+        
+        IO.println("Difference en nombre de jours : " + differenceDays);
+        IO.println("Difference en nombre de mois : " + differenceMonths);
     }
 }

@@ -1,5 +1,6 @@
 package com.fahami.cda;
 
+import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalDate;
@@ -11,7 +12,9 @@ import java.time.Period;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+import java.util.Date;
 
 public class Main {
     public static void main(String[] args) {
@@ -74,5 +77,28 @@ public class Main {
         
         IO.println("Difference en nombre de jours : " + differenceDays);
         IO.println("Difference en nombre de mois : " + differenceMonths);
+
+        // Affichage des dates
+        // Avec l'ancien API Date
+        Date today = new Date();
+        SimpleDateFormat format = new SimpleDateFormat("'le' dd MMMM yyyy 'à' HH:mm;ss Z");
+        IO.println(format.format(today));
+
+        // Affichage de la date avec l'API moderne Date et Time du package "java.time.*"
+        ZoneId zoneLondon = ZoneId.of("Europe/London");
+        ZoneId zoneCairo = ZoneId.of("Africa/Cairo");
+
+        // IO.println(ZoneId.getAvailableZoneIds());
+        ZonedDateTime zonedDateTimeLondon = ZonedDateTime.now(zoneLondon); // configurer l'heure locale à Londres
+        ZonedDateTime londonDateTime = ZonedDateTime.of(LocalDateTime.of(2025, Month.JUNE, 05, 05, 15), zoneLondon); // Indiquer que l'heure locale est celle de Londres
+
+        ZonedDateTime zoneDateTimeCairo = ZonedDateTime.of(LocalDateTime.of(2023,Month.APRIL, 25, 20,06), zoneCairo);
+        IO.println(zonedDateTimeLondon);
+
+        // Formater les date-heure du Caire et de Londre
+        DateTimeFormatter formatter = DateTimeFormatter.ISO_ZONED_DATE_TIME;
+        IO.println("Date formatée en heure d'été : " + londonDateTime.format(formatter));
+        
+        IO.println("Date formatée au Caire(Egypte) : " + zoneDateTimeCairo.format(formatter));
     }
 }
